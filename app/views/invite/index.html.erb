@@ -1,0 +1,16 @@
+<h2>Create Invite</h2>
+<%= form_with(url: create_invite_path, model: @invite) do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+  <div>
+    <%= form.label :possible_dates %>
+    <%= form.text_field :possible_dates, class: "gui-input", id: "date_range" %>
+  </div>
+  <%= form.submit %>
+<% end %>

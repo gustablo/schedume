@@ -1,0 +1,19 @@
+<div class="form is-flex is-flex-direction-column is-justify-content-space-around ml-6">
+  <%= form_with(url: sigin_path, local: true, class: 'is-flex is-flex-direction-column') do |form| %>
+    <div class="control">
+      <%= form.label :email, class: 'label' %>
+      <%= form.text_field :email, class: 'input', placeholder: 'Email' %>
+    </div>
+    <div class="control">
+      <%= form.label :password, class: 'label' %>
+      <%= form.text_field :password, class: 'input', placeholder: 'Password' %>
+    </div>
+    <%= form.submit "Sign In", class: 'button is-link' %>
+  <% end %>
+  <section class="footer-infos is-flex is-flex-direction-column">
+    <p class="create-account has-text-weight-bold">Don't have an account? <b class="has-text-link click-here link">Click here</b></p>
+    <div class="terms has-background-white-ter p-2">
+      <p class="has-text-grey">You're agreeing to our <span class="has-text-link link">Terms of Service</span> and <span class="has-text-link link">Privacy Policy</span> when you sign in, by the way.</p>
+    </div>
+  </section>
+</div>
