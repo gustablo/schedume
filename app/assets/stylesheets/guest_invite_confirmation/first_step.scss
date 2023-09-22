@@ -1,18 +1,18 @@
 .first-step-container {
     height: 100%;
     width: 100%;
-    // background-image: image-url("bg-first-step.jpg");
-    // background-size: cover;
+    background-image: image-url("fs-2.svg");
+    background-size: cover;
 
     .wrapper {
         width: 100%;
         height: 100%;
-        // backdrop-filter: blur(5px);
-        width: 340px; // this is related with .flatpickr-input.width defined in this file
+        width: 400px; // this is related with .flatpickr-input.width defined in this file
         gap: 24px;
 
         form {
             gap: 16px;
+            transform: scale(1.2);
     
             .flatpickr-input {
                 display: none;

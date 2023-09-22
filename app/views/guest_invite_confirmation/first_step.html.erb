@@ -1,8 +1,8 @@
 <div class="first-step-container is-flex is-justify-content-center is-align-items-center">
-  <div class="wrapper has-background-gray is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
-    <div>
-      <h2 class="mb-1 is-size-4 has-text-weight-bold">Select days you’re free</h2>
-      <small class="has-text-grey">Teachable recruiting team has turned off some days that don't work for the interviewers</small>
+  <div class="wrapper is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+    <div class="mb-5">
+      <h2 class="mb-1 is-size-3 has-text-weight-bold">Select days you’re free</h2>
+      <small class="has-text-grey is-size-6">Teachable recruiting team has turned off some days that don't work for the interviewers</small>
     </div>
     <%= form_with(url: confirm_first_step_path(code: @code), model: @invite, method: :post, class: 'is-flex is-flex-direction-column') do |form| %>
       <div>
