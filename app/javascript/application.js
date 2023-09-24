@@ -5,9 +5,13 @@
 
 //= require flatpickr
 document.addEventListener('DOMContentLoaded', function () {
+    
+    const dateRange = document.getElementById('date_range');
+    
     flatpickr('#date_range', {
         mode: "multiple",
         dateFormat: "Y-m-d",
-        inline: true
+        inline: true,
+        enable: dateRange.defaultValue.trim().split(',')
     });
 });
