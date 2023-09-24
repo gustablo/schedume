@@ -5,7 +5,6 @@ class GuestInviteConfirmationController < ApplicationController
 
   def first_step
     @code = params[:code]
-    @invite = Invite.find_by(code: params[:code])
   end
 
   def confirm_first_step
@@ -21,6 +20,11 @@ class GuestInviteConfirmationController < ApplicationController
   end
 
   def second_step
+    @confirmed_dates = @invite.possible_confirmed_dates.split(",")
+  end
+
+  def oi
+    "texto"
   end
 
   private
