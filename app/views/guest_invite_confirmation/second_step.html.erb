@@ -4,23 +4,25 @@
     <small class="has-text-grey subtitle is-size-6">Teachable recruiting team has turned off some days that don't work for the interviewers</small>
   </div>
   <div class="wrapper">
-    <div class="cards-container is-flex is-flex-direction-column">
-      <% @confirmed_dates.each do |date| %>
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title is-size-5">
-              <%= format_date_header(date) %>
-            </p>
-          </header>
-          <div class="card-content">
-            <div class="content is-flex times-input-container">
-              <input type="time" class="input" />
-              <input type="time" class="input" />
+    <%= form_with(url: confirm_second_step_path(code: @code), method: :post) do |form| %>
+      <div class="cards-container is-flex is-flex-direction-column">
+        <% @confirmed_dates.each do |date| %>
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title is-size-5">
+                <%= format_date_header(date) %>
+              </p>
+            </header>
+            <div class="card-content">
+              <div class="content is-flex times-input-container">
+                <%= form.time_field 'start[]', class: "input" %>
+                <%= form.time_field 'end[]', class: "input" %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+      <%= form.submit "Confirm", class: "button is-link confirm mt-5" %>
+    <% end %>
   </div>
-  <button class="button is-link confirm mt-5">Confirm</button>
 </div>

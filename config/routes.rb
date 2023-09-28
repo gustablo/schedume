@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post "/:code", to: "guest_invite_confirmation#confirm_first_step", as: "confirm_first_step"
 
     get "/:code/finish", to: "guest_invite_confirmation#second_step", as: "second_step"
+    post "/:code/finish", to: "guest_invite_confirmation#confirm_second_step", as: "confirm_second_step"
   end
 
   post "/sigin", to: "session#sigin"

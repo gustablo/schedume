@@ -8,8 +8,8 @@ class GuestInviteConfirmationController < ApplicationController
   end
 
   def confirm_first_step
-    first_step_params = params.require(:invite).permit(:possible_dates)
-    @invite.possible_confirmed_dates = first_step_params[:possible_dates]
+    first_step_params = params.require(:invite).permit(:possible_confirmed_dates)
+    @invite.possible_confirmed_dates = first_step_params[:possible_confirmed_dates]
 
     if @invite.save
       alert nil
@@ -20,11 +20,15 @@ class GuestInviteConfirmationController < ApplicationController
   end
 
   def second_step
+    @code = params[:code]
     @confirmed_dates = @invite.possible_confirmed_dates.split(",")
   end
-
-  def oi
-    "texto"
+  
+  def confirm_second_step
+    start_dates = params[:start]
+    end_dates = params[:end]
+    
+    puts end_dates, start_dates
   end
 
   private
