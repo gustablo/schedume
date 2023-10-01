@@ -7,17 +7,34 @@
 //= require flatpickr
 
 document.addEventListener('DOMContentLoaded', function () {
-    const dateRange = document.getElementById('date_range');
+    loadGuestInviteConfirmationFlatpckr();
+    loadInviteFlatpickr();
+});
+
+function loadInviteFlatpickr() {
+    const elId = 'invite_date_range';
+    const dateRange = document.getElementById(elId);
+
+    if (dateRange) {
+        flatpickr(`#${elId}`, {
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+        });
+    }
+}
+
+function loadGuestInviteConfirmationFlatpckr() {
+    const elId = 'date_range';
+    const dateRange = document.getElementById(elId);
 
     if (dateRange) {
         const value = dateRange.attributes['data-possible-dates'].nodeValue;
 
-        flatpickr('#date_range', {
+        flatpickr(`#${elId}`, {
             mode: "multiple",
             dateFormat: "Y-m-d",
             inline: true,
             enable: value.trim().split(','),
         });
     }
-    
-});
+}

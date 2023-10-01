@@ -1,3 +1,5 @@
+$primary-color: hsl(171, 100%, 41%);
+
 .first-step-container {
     height: 100%;
     width: 100%;
@@ -23,6 +25,13 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+
+                
+
+                .flatpickr-day.selected  {
+                    background: $primary-color;
+                    border-color: $primary-color;
+                }
     
                 .flatpickr-months, .flatpickr-prev-month, .flatpickr-next-month {
                     margin-top: 8px;

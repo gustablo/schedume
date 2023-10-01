@@ -1,5 +1,5 @@
 class GuestInviteConfirmationController < ApplicationController
-  before_action :find_invite
+  before_action :find_invite, except: [:thank_you]
 
   include Flash
 
@@ -9,6 +9,12 @@ class GuestInviteConfirmationController < ApplicationController
 
   def confirm_first_step
     first_step_params = params.require(:invite).permit(:possible_confirmed_dates)
+
+    if has_empty?(first_step_params, [:possible_confirmed_dates])
+      alert "Select at least one date"
+      return redirect_to first_step_url(params[:code]) 
+    end
+  
     @invite.possible_confirmed_dates = first_step_params[:possible_confirmed_dates]
 
     if @invite.save
@@ -25,10 +31,44 @@ class GuestInviteConfirmationController < ApplicationController
   end
   
   def confirm_second_step
-    start_dates = params[:start]
-    end_dates = params[:end]
-    
-    puts end_dates, start_dates
+    confirmed_dates = @invite.possible_confirmed_dates.split(",")
+    tbd = {}
+
+    confirmed_dates.each do |date| 
+      start_dates = params[:start][date]
+      end_dates = params[:end][date]
+
+      if (start_dates.any?(&:blank?) || end_dates.any?(&:blank?))
+        return redirect_to second_step_url(params[:code]) 
+      end
+
+      tbd[date] = jk
+      ## logic here
+    end
+
+    {
+      "2023-01-01": {
+        start: [1,2,3],
+        end: [3,2,1]
+      }
+      "2023-01-02": [
+        {
+          start: "1",
+          end: "2" 
+        },
+        {
+          start: "3",
+          end: "4"
+        }
+      ] 
+    }
+
+
+    redirect_to thank_you_url
+  end
+
+  def thank_you
+
   end
 
   private
@@ -42,4 +82,9 @@ class GuestInviteConfirmationController < ApplicationController
       alert "Invite not found"
     end
   end
+
+  def has_empty?(params, symbols)
+    symbols.any? { |s| params[s].blank? }    
+  end
+
 end

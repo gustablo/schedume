@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   root "home#index"
 
   scope "/confirmation" do
-    get "/:code", to: "guest_invite_confirmation#first_step"
-    post "/:code", to: "guest_invite_confirmation#confirm_first_step", as: "confirm_first_step"
+    scope "/:code" do
+      get "", to: "guest_invite_confirmation#first_step", as: "first_step"
+      post "", to: "guest_invite_confirmation#confirm_first_step", as: "confirm_first_step"
+      
+      get "/finish", to: "guest_invite_confirmation#second_step", as: "second_step"
+      post "/finish", to: "guest_invite_confirmation#confirm_second_step", as: "confirm_second_step"
 
-    get "/:code/finish", to: "guest_invite_confirmation#second_step", as: "second_step"
-    post "/:code/finish", to: "guest_invite_confirmation#confirm_second_step", as: "confirm_second_step"
+      get "thank-you", to: "guest_invite_confirmation#thank_you", as: "thank_you"
+    end
+
   end
 
   post "/sigin", to: "session#sigin"

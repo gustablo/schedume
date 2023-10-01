@@ -3,4 +3,5 @@ class Invite < ApplicationRecord
   belongs_to :guest
   
   has_one :schedules
+
 end

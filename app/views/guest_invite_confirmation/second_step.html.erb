@@ -15,14 +15,14 @@
             </header>
             <div class="card-content">
               <div class="content is-flex times-input-container">
-                <%= form.time_field 'start[]', class: "input" %>
-                <%= form.time_field 'end[]', class: "input" %>
+                <%= form.time_field "start[#{date}][]", class: "input" %>
+                <%= form.time_field "end[#{date}][]", class: "input" %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
-      <%= form.submit "Confirm", class: "button is-link confirm mt-5" %>
+      <%= form.submit "Confirm", class: "button is-primary confirm mt-5" %>
     <% end %>
   </div>
 </div>
