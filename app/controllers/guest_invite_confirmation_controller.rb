@@ -12,9 +12,9 @@ class GuestInviteConfirmationController < ApplicationController
 
     if has_empty?(first_step_params, [:possible_confirmed_dates])
       alert "Select at least one date"
-      return redirect_to first_step_url(params[:code]) 
+      return redirect_to first_step_url(params[:code])
     end
-  
+
     @invite.possible_confirmed_dates = first_step_params[:possible_confirmed_dates]
 
     if @invite.save
@@ -27,48 +27,25 @@ class GuestInviteConfirmationController < ApplicationController
 
   def second_step
     @code = params[:code]
-    @confirmed_dates = @invite.possible_confirmed_dates.split(",")
+    @confirmed_dates = @invite.possible_confirmed_dates_to_a
   end
-  
+
   def confirm_second_step
-    confirmed_dates = @invite.possible_confirmed_dates.split(",")
-    tbd = {}
-
-    confirmed_dates.each do |date| 
-      start_dates = params[:start][date]
-      end_dates = params[:end][date]
-
-      if (start_dates.any?(&:blank?) || end_dates.any?(&:blank?))
-        return redirect_to second_step_url(params[:code]) 
-      end
-
-      tbd[date] = jk
-      ## logic here
+    @invite.build_confirmed_datetimes(params[:start], params[:end]) do
+      return redirect_to second_step_url(params[:code])
     end
 
-    {
-      "2023-01-01": {
-        start: [1,2,3],
-        end: [3,2,1]
-      }
-      "2023-01-02": [
-        {
-          start: "1",
-          end: "2" 
-        },
-        {
-          start: "3",
-          end: "4"
-        }
-      ] 
-    }
+    @invite.confirmed = true
 
-
-    redirect_to thank_you_url
+    if @invite.save
+      alert nil
+      redirect_to thank_you_url
+    else
+      alert "Error trying to confirm"
+    end
   end
 
   def thank_you
-
   end
 
   private
@@ -84,7 +61,6 @@ class GuestInviteConfirmationController < ApplicationController
   end
 
   def has_empty?(params, symbols)
-    symbols.any? { |s| params[s].blank? }    
+    symbols.any? { |s| params[s].blank? }
   end
-
 end

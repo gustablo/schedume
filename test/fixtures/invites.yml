@@ -1,15 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  code: MyString
+  code: unique_code_1
   confirmed: false
-  possible_dates: MyString
+  possible_dates: 2023-01-01, 2023-01-02, 2023-01-03
   operator: one
   guest: one
+  possible_confirmed_dates: null
+  possible_confirmed_datetimes: {}
 
 two:
-  code: MyString
+  code: unique_code_1
   confirmed: false
-  possible_dates: MyString
+  possible_dates: 2023-01-01, 2023-01-02, 2023-01-03
   operator: two
   guest: two
+  possible_confirmed_dates: null
+  possible_confirmed_datetimes: {}

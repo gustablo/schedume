@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_013425) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_12_171445) do
   create_table "guests", force: :cascade do |t|
     t.string "email"
     t.string "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_013425) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "possible_confirmed_dates"
+    t.json "possible_confirmed_datetimes", default: {}
     t.index ["guest_id"], name: "index_invites_on_guest_id"
     t.index ["operator_id"], name: "index_invites_on_operator_id"
   end
